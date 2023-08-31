@@ -1,5 +1,7 @@
----
-'openzeppelin-solidity': patch
----
-
-`Math`: Optimized stack operations in `mulDiv`.
+`
+'openzeppelin-solidity':
+patch
+`Math`:
+Optimized stack operations in
+`mulDiv`
+`
