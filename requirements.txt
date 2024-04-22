@@ -1,1 +1,3 @@
-certora-cli==4
+cer
+  tora
+-cli== 4
