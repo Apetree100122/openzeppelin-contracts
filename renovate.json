@@ -1,9 +1,3 @@
-{ "extends":
-  [ 
-  "github > OpenZeppelin/configs"
-  ],
-  "labels":
-  [
-    "-changeset"
-]
+{ 
+  "extends":[ "github > OpenZeppelin/configs"], "labels":["-changeset"]
 }
