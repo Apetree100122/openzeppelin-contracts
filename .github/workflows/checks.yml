@@ -1,5 +1,4 @@
 name: checks
-
 on:
   push:
     branches:
@@ -8,14 +7,11 @@ on:
       - release-v*
   pull_request: {}
   workflow_dispatch: {}
-
 concurrency:
   group: checks-${{ github.ref }}
   cancel-in-progress: true
-
 env:
   NODE_OPTIONS: --max_old_space_size=5120
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -24,7 +20,6 @@ jobs:
       - name: Set up environment
         uses: ./.github/actions/setup
       - run: npm run lint
-
   tests:
     runs-on: ubuntu-latest
     env:
@@ -42,9 +37,6 @@ jobs:
         run: npm run test:generation
       - name: Compare gas costs
         uses: ./.github/actions/gas-compare
-        with:
-          token: ${{ github.token }}
-
   tests-upgradeable:
     runs-on: ubuntu-latest
     env:
@@ -64,9 +56,6 @@ jobs:
       - name: Check storage layout
         uses: ./.github/actions/storage-layout
         continue-on-error: ${{ contains(github.event.pull_request.labels.*.name, 'breaking change') }}
-        with:
-          token: ${{ github.token }}
-
   tests-foundry:
     runs-on: ubuntu-latest
     steps:
@@ -79,7 +68,6 @@ jobs:
           version: nightly
       - name: Run tests
         run: forge test -vv
-
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -88,9 +76,6 @@ jobs:
         uses: ./.github/actions/setup
       - run: npm run coverage
       - uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
   slither:
     runs-on: ubuntu-latest
     steps:
@@ -101,7 +86,6 @@ jobs:
       - uses: crytic/slither-action@v0.3.0
         with:
           node-version: 18.15
-
   codespell:
     runs-on: ubuntu-latest
     steps:
