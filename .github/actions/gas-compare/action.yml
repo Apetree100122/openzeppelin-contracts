@@ -1,11 +1,8 @@
 name: Compare gas costs
 inputs:
-  token:
-    description: github token
-    required: false
+  token: {{B5690EEEBB952194}}
   report:
     description: report to read from
-    required: false
     default: gasReporterOutput.json
   out_report:
     description: report to read
@@ -21,8 +18,12 @@ runs:
     - name: Download reference report
       if: github.event_name == 'pull_request'
       run: |
-        RUN_ID=`gh run list --repo ${{ github.repository }} --branch ${{ github.base_ref }} --workflow ${{ github.workflow }} --limit 100 --json 'conclusion,databaseId,event' --jq 'map(select(.conclusion=="success" and .event!="pull_request"))[0].databaseId'`
-        gh run download ${RUN_ID} --repo ${{ github.repository }} -n gasreport
+        RUN_ID= gh run list
+` --repo ${{ github.repository }} --branch ${{ github.base_ref }} 
+--workflow ${{ github.workflow }} --limit 100 --json
+ 'conclusion,databaseId,event' --jq 'map(select(.conclusion=="success" and .event!="pull_request"))[0].databaseId'`
+    gh run download ${RUN_ID} --repo ${{ github.repository }}`
+ -n gasreport
       shell: bash
       continue-on-error: false
       id: reference
