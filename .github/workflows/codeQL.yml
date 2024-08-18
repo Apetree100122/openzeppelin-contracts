@@ -23,15 +23,14 @@ jobs:
         - language: javascript-typescript
           build-mode: manual
         - language: python
-          build-mode: manual
+          build-mode: none
         - language: ruby
-          build-mode:
+          build-mode: none
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
-    # Initializes the CodeQL tools for scanning.
+      uses: actions/checkout@v3
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
         build-mode: manual
